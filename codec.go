@@ -73,7 +73,7 @@ func NewReader(r io.Reader, codec string, data []byte) (io.Reader, error) {
 
 // 函数返回一个Writer接口，该接口将提供的数据编码后写入w；
 // codec参数指定编码格式，如果bom为真，会在w开始处写入BOM标识。
-func NeWriter(w io.Writer, codec string, bom bool) (io.Writer, error) {
+func NewWriter(w io.Writer, codec string, bom bool) (io.Writer, error) {
 	if bom {
 		switch codec {
 		case "utf-16be":
@@ -94,5 +94,13 @@ func NeWriter(w io.Writer, codec string, bom bool) (io.Writer, error) {
 		return transform.NewWriter(w, c.NewEncoder()), nil
 	} else {
 		return nil, ErrUnknown
+	}
+}
+
+func GetEncoding(name string) encoding.Encoding {
+	if c, ok := Codec[name]; ok {
+		return c
+	} else {
+		return nil
 	}
 }
