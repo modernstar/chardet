@@ -2,14 +2,15 @@ package chardet
 
 import (
 	"bytes"
-	"code.google.com/p/go.text/encoding"
-	"code.google.com/p/go.text/encoding/japanese"
-	"code.google.com/p/go.text/encoding/korean"
-	"code.google.com/p/go.text/encoding/simplifiedchinese"
-	"code.google.com/p/go.text/encoding/traditionalchinese"
-	"code.google.com/p/go.text/encoding/unicode"
-	"code.google.com/p/go.text/transform"
 	"errors"
+	"golang.org/x/text/encoding"
+	"golang.org/x/text/encoding/japanese"
+	"golang.org/x/text/encoding/korean"
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/encoding/traditionalchinese"
+	"golang.org/x/text/encoding/unicode"
+	"golang.org/x/text/encoding/unicode/utf32"
+	"golang.org/x/text/transform"
 	"io"
 )
 
@@ -21,8 +22,8 @@ var Codec = map[string]encoding.Encoding{
 	"utf-8":       encoding.Nop,
 	"utf-16be":    unicode.UTF16(unicode.BigEndian, unicode.IgnoreBOM),
 	"utf-16le":    unicode.UTF16(unicode.LittleEndian, unicode.IgnoreBOM),
-	"utf-32be":    UTF32BE,
-	"utf-32le":    UTF32LE,
+	"utf-32be":    utf32.UTF32(utf32.BigEndian, utf32.IgnoreBOM),
+	"utf-32le":    utf32.UTF32(utf32.LittleEndian, utf32.IgnoreBOM),
 	"hz-gb2312":   simplifiedchinese.HZGB2312,
 	"gbk":         simplifiedchinese.GBK,
 	"big5":        traditionalchinese.Big5,
